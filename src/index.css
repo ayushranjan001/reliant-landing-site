@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: #eef5ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-600: #2457d6;
+  --color-brand-700: #1f47b2;
+  --color-brand-800: #173783;
+  --color-brand-900: #102a56;
+  --color-brand-950: #0a1b34;
+  --color-accent-400: #f9b84a;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+  --color-coral-500: #f16c5b;
+  --color-ink: #132238;
+  --color-muted: #64748b;
+  --color-paper: #f7f5ef;
+  --color-surface: #ffffff;
+}
+
+:root { font-family: var(--font-sans); color: var(--color-ink); background: var(--color-paper); font-synthesis: none; text-rendering: optimizeLegibility; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: var(--color-paper); }
+button, a, input, textarea, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+::selection { background: #f9b84a; color: #132238; }
+
+.font-display { font-family: var(--font-display); }
+.text-balance { text-wrap: balance; }
+.section-grid { background-image: linear-gradient(rgba(16,42,86,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(16,42,86,.045) 1px, transparent 1px); background-size: 36px 36px; }
+.soft-shadow { box-shadow: 0 24px 70px rgba(16, 42, 86, .10); }
+.card-shadow { box-shadow: 0 14px 40px rgba(16, 42, 86, .08); }
+.glow-amber { box-shadow: 0 0 0 8px rgba(245, 158, 11, .10), 0 16px 40px rgba(245, 158, 11, .16); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
