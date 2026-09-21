@@ -1,0 +1,20 @@
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #f8fafc; }
+* { box-sizing: border-box; }
+::selection { background: rgba(79, 70, 229, .18); }
+.gradient-text {
+  background: linear-gradient(110deg, #4f46e5 10%, #06b6d4 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-orb { position: absolute; border-radius: 50%; filter: blur(1px); pointer-events: none; }
+.float-card { animation: float 5s ease-in-out infinite; }
+.float-card.delay { animation-delay: -2s; }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .float-card, .reveal { animation: none; transition: none; }
+}
