@@ -34,6 +34,8 @@ export default function Navbar() {
   const mobileNavClass = ({ isActive }) =>
     `rounded-xl px-4 py-3.5 text-base font-semibold transition ${isActive ? 'bg-brand-100 text-brand-800' : 'text-slate-700 hover:bg-white'}`;
 
+  const closeMobileMenu = () => setOpen(false);
+
   return (
     <>
       <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'px-3 pt-3' : 'pt-0'}`}>
@@ -50,7 +52,7 @@ export default function Navbar() {
 
           <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary navigation">
             {links.map(([label, href]) => (
-              <NavLink key={href} to={href} end={href === '/'} className={navClass}>
+              <NavLink key={href} to={href} end={href === '/'} className={navClass} onClick={closeMobileMenu}>
                 {label}
               </NavLink>
             ))}
@@ -112,14 +114,14 @@ export default function Navbar() {
 
               <nav className="mt-8 flex flex-col gap-2" aria-label="Mobile primary navigation">
                 {links.map(([label, href]) => (
-                  <NavLink key={href} to={href} end={href === '/'} className={mobileNavClass}>
+                  <NavLink key={href} to={href} end={href === '/'} className={mobileNavClass} onClick={closeMobileMenu}>
                     {label}
                   </NavLink>
                 ))}
               </nav>
 
               <div className="mt-auto">
-                <NavLink to="/contact" end className="flex items-center justify-between rounded-2xl bg-accent-500 px-5 py-4 font-bold text-brand-950">
+                <NavLink to="/contact" end onClick={closeMobileMenu} className="flex items-center justify-between rounded-2xl bg-accent-500 px-5 py-4 font-bold text-brand-950">
                   Book Free Demo Class <ArrowUpRight size={20} />
                 </NavLink>
                 <p className="mt-4 text-sm leading-6 text-slate-500">
