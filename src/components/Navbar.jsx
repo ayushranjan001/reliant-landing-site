@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 
 const links = [
   ['Home', '/'],
   ['About Us', '/about'],
-  ['Courses', '/courses'],
+  ['Courses', '/#courses'],
   ['Testimonials', '/testimonials'],
   ['Contact', '/contact'],
 ];
@@ -26,26 +26,63 @@ export default function Navbar() {
 
   useEffect(() => {
     setOpen(false);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
-  const goToCourses = (event) => {
+  useEffect(() => {
+    if (location.pathname !== '/') return;
+
+    const frame = window.requestAnimationFrame(() => {
+      if (location.hash === '#courses') {
+        document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [location.pathname, location.hash]);
+
+  const goHome = (event) => {
     event.preventDefault();
     setOpen(false);
 
-    if (location.pathname === '/') {
-      document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      window.history.replaceState(null, '', '#courses');
+    if (location.pathname === '/' && !location.hash) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
       return;
     }
 
-    navigate('/courses');
+    navigate('/', { replace: false });
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    });
   };
+
+  const goCourses = (event) => {
+    event.preventDefault();
+    setOpen(false);
+
+    if (location.pathname === '/' && location.hash === '#courses') {
+      document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    navigate('/#courses');
+  };
+
+  const navClass = ({ isActive }) =>
+    `text-sm font-semibold transition hover:text-brand-700 ${isActive ? 'text-brand-700' : 'text-slate-600'}`;
+
+  const mobileNavClass = ({ isActive }) =>
+    `rounded-xl px-4 py-3.5 text-base font-semibold ${isActive ? 'bg-brand-100 text-brand-800' : 'text-slate-700'}`;
 
   return (
     <>
       <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'px-3 pt-3' : 'pt-0'}`}>
         <div className={`mx-auto flex max-w-7xl items-center justify-between border-b px-4 py-3 transition-all sm:px-6 lg:px-8 ${scrolled ? 'rounded-2xl border-white/50 bg-white/80 shadow-lg shadow-brand-950/5 backdrop-blur-xl' : 'border-white/30 bg-paper/85 backdrop-blur-md'}`}>
-          <Link to="/" className="flex items-center gap-3" aria-label="Reliant India Home Tuition home">
+          <a
+            href="/"
+            onClick={goHome}
+            className="flex items-center gap-3"
+            aria-label="Reliant India Home Tuition home"
+          >
             <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-950 p-2 shadow-lg shadow-brand-950/10">
               <img src="/Media/favi.png" alt="Reliant India logo" className="h-full w-full object-contain" />
             </span>
@@ -53,27 +90,45 @@ export default function Navbar() {
               <span className="block font-display text-sm font-bold text-brand-950">Reliant India</span>
               <span className="block text-xs font-semibold text-slate-500">Home Tuition</span>
             </span>
-          </Link>
+          </a>
 
           <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary navigation">
-            {links.map(([label, href]) =>
-              label === 'Courses' ? (
-                <a key={href} href={location.pathname === '/' ? '#courses' : '/courses'} onClick={goToCourses} className={`text-sm font-semibold transition hover:text-brand-700 ${location.pathname === '/courses' ? 'text-brand-700' : 'text-slate-600'}`}>
-                  {label}
-                </a>
-              ) : (
-                <NavLink key={href} to={href} end={href === '/'} className={({ isActive }) => `text-sm font-semibold transition hover:text-brand-700 ${isActive ? 'text-brand-700' : 'text-slate-600'}`}>
-                  {label}
-                </NavLink>
-              )
-            )}
+            <a href="/" onClick={goHome} className={`text-sm font-semibold transition hover:text-brand-700 ${location.pathname === '/' && !location.hash ? 'text-brand-700' : 'text-slate-600'}`}>Home</a>
+
+            <NavLink to="/about" end className={navClass}>About Us</NavLink>
+
+            <a
+              href="/#courses"
+              onClick={goCourses}
+              className={`text-sm font-semibold transition hover:text-brand-700 ${location.pathname === '/' && location.hash === '#courses' ? 'text-brand-700' : 'text-slate-600'}`}
+            >
+              Courses
+            </a>
+
+            <NavLink to="/testimonials" end className={navClass}>Testimonials</NavLink>
+            <NavLink to="/contact" end className={navClass}>Contact</NavLink>
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link to="/contact" className="hidden rounded-xl bg-accent-500 px-4 py-2.5 text-sm font-bold text-brand-950 shadow-md shadow-accent-500/20 transition hover:-translate-y-0.5 hover:bg-accent-400 sm:inline-flex">
+            <a
+              href="/contact"
+              onClick={(event) => {
+                event.preventDefault();
+                setOpen(false);
+                navigate('/contact');
+              }}
+              className="hidden rounded-xl bg-accent-500 px-4 py-2.5 text-sm font-bold text-brand-950 shadow-md shadow-accent-500/20 transition hover:-translate-y-0.5 hover:bg-accent-400 sm:inline-flex"
+            >
               Book Free Demo Class
-            </Link>
-            <button type="button" onClick={() => setOpen(true)} aria-label="Open navigation menu" aria-expanded={open} className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-white text-brand-950 lg:hidden">
+            </a>
+
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label="Open navigation menu"
+              aria-expanded={open}
+              className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-white text-brand-950 lg:hidden"
+            >
               <Menu size={22} />
             </button>
           </div>
@@ -83,30 +138,58 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <>
-            <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(false)} aria-label="Close menu overlay" className="fixed inset-0 z-[60] bg-brand-950/35 backdrop-blur-sm" />
-            <motion.aside initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', stiffness: 280, damping: 30 }} className="fixed right-0 top-0 z-[70] flex h-full w-[min(90vw,360px)] flex-col bg-paper p-6 shadow-2xl lg:hidden" aria-label="Mobile navigation">
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              aria-label="Close menu overlay"
+              className="fixed inset-0 z-[60] bg-brand-950/35 backdrop-blur-sm"
+            />
+
+            <motion.aside
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 280, damping: 30 }}
+              className="fixed right-0 top-0 z-[70] flex h-full w-[min(90vw,360px)] flex-col bg-paper p-6 shadow-2xl lg:hidden"
+              aria-label="Mobile navigation"
+            >
               <div className="flex items-center justify-between">
                 <span className="font-display text-lg font-bold text-brand-950">Menu</span>
-                <button type="button" onClick={() => setOpen(false)} aria-label="Close navigation menu" className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white"><X size={20} /></button>
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close navigation menu"
+                  className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white"
+                >
+                  <X size={20} />
+                </button>
               </div>
 
               <nav className="mt-8 flex flex-col gap-2" aria-label="Mobile primary navigation">
-                {links.map(([label, href]) =>
-                  label === 'Courses' ? (
-                    <a key={href} href={location.pathname === '/' ? '#courses' : '/courses'} onClick={goToCourses} className={`rounded-xl px-4 py-3.5 text-base font-semibold ${location.pathname === '/courses' ? 'bg-brand-100 text-brand-800' : 'text-slate-700'}`}>
-                      {label}
-                    </a>
-                  ) : (
-                    <NavLink key={href} to={href} end={href === '/'} className={({ isActive }) => `rounded-xl px-4 py-3.5 text-base font-semibold ${isActive ? 'bg-brand-100 text-brand-800' : 'text-slate-700'}`}>
-                      {label}
-                    </NavLink>
-                  )
-                )}
+                <a href="/" onClick={goHome} className={mobileNavClass({ isActive: location.pathname === '/' && !location.hash })}>Home</a>
+                <NavLink to="/about" end className={mobileNavClass}>About Us</NavLink>
+                <a href="/#courses" onClick={goCourses} className={mobileNavClass({ isActive: location.pathname === '/' && location.hash === '#courses' })}>Courses</a>
+                <NavLink to="/testimonials" end className={mobileNavClass}>Testimonials</NavLink>
+                <NavLink to="/contact" end className={mobileNavClass}>Contact</NavLink>
               </nav>
 
               <div className="mt-auto">
-                <Link to="/contact" className="flex items-center justify-between rounded-2xl bg-accent-500 px-5 py-4 font-bold text-brand-950">Book Free Demo Class <ArrowUpRight size={20} /></Link>
-                <p className="mt-4 text-sm leading-6 text-slate-500">One-to-one home tuition, flexible schedules and academic support.</p>
+                <a
+                  href="/contact"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    setOpen(false);
+                    navigate('/contact');
+                  }}
+                  className="flex items-center justify-between rounded-2xl bg-accent-500 px-5 py-4 font-bold text-brand-950"
+                >
+                  Book Free Demo Class <ArrowUpRight size={20} />
+                </a>
+                <p className="mt-4 text-sm leading-6 text-slate-500">
+                  One-to-one home tuition, flexible schedules and academic support.
+                </p>
               </div>
             </motion.aside>
           </>
