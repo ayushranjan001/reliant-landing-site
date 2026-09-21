@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
+import logoUrl from '../../Media/favi.png';
 
 const links = [
   ['Home', '/'],
@@ -39,7 +40,7 @@ export default function Navbar() {
         <div className={`mx-auto flex max-w-7xl items-center justify-between border-b px-4 py-3 transition-all sm:px-6 lg:px-8 ${scrolled ? 'rounded-2xl border-white/50 bg-white/80 shadow-lg shadow-brand-950/5 backdrop-blur-xl' : 'border-white/30 bg-paper/85 backdrop-blur-md'}`}>
           <NavLink to="/" end className="flex items-center gap-3" aria-label="Reliant India Home Tuition home">
             <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-950 p-2 shadow-lg shadow-brand-950/10">
-              <img src="/Media/favi.png" alt="Reliant India logo" className="h-full w-full object-contain" />
+              <img src={logoUrl} alt="Reliant India logo" className="h-full w-full object-contain" />
             </span>
             <span className="hidden sm:block">
               <span className="block font-display text-sm font-bold text-brand-950">Reliant India</span>
