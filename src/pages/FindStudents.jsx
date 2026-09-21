@@ -5,7 +5,7 @@ import { studentRequests } from '../data/marketplace';
 
 export default function FindStudents() {
   return (
-    <main className="bg-paper pt-28 sm:pt-32">
+    <div className="bg-paper pt-28 sm:pt-32">
       <section className="bg-brand-950 text-white">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           <div className="max-w-4xl">
@@ -35,6 +35,6 @@ export default function FindStudents() {
       <section className="bg-white"><div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20"><p className="text-sm font-bold uppercase tracking-[.18em] text-brand-700">Teacher monetization</p><h2 className="mt-2 max-w-3xl font-display text-3xl font-bold text-brand-950 sm:text-4xl">Give teachers a business model they can understand.</h2><div className="mt-8 grid gap-5 lg:grid-cols-3"><div className="rounded-[1.8rem] border border-brand-100 bg-paper p-7"><p className="text-sm font-bold text-brand-700">Free</p><h3 className="mt-2 font-display text-2xl font-bold text-brand-950">Build your profile</h3><p className="mt-3 text-sm leading-6 text-slate-600">Create a profile, list subjects, add credentials and define availability.</p></div><div className="rounded-[1.8rem] border-2 border-accent-400 bg-white p-7 shadow-xl shadow-accent-500/10"><p className="text-sm font-bold text-accent-700">Pro</p><h3 className="mt-2 font-display text-2xl font-bold text-brand-950">Unlock student leads</h3><p className="mt-3 text-sm leading-6 text-slate-600">Pay for access to high-intent student requirements and enhanced profile visibility.</p><Link to="/checkout?product=teacher-pro" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-accent-500 px-5 py-3 font-bold text-brand-950">View Pro checkout <ArrowRight size={17}/></Link></div><div className="rounded-[1.8rem] border border-brand-100 bg-paper p-7"><p className="text-sm font-bold text-brand-700">Professional</p><h3 className="mt-2 font-display text-2xl font-bold text-brand-950">Priority visibility</h3><p className="mt-3 text-sm leading-6 text-slate-600">Higher profile visibility, response insights and additional lead credits.</p></div></div></div></section>
 
       <section className="px-4 py-16 sm:px-6 lg:px-8"><div className="mx-auto max-w-7xl rounded-[2rem] bg-brand-900 p-8 text-white sm:p-10"><div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between"><div><div className="flex items-center gap-2 text-accent-300"><BriefcaseBusiness size={18}/><span className="text-sm font-bold uppercase tracking-[.18em]">Built for educators</span></div><h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">Teaching should be a career platform, not just a classifieds listing.</h2></div><Link to="/contact" className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-5 py-3.5 font-bold text-brand-950">Start as a teacher <ArrowRight size={18}/></Link></div></div></section>
-    </main>
+    </div>
   );
 }
