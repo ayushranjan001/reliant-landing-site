@@ -7,8 +7,6 @@ const links = [
   ['Home', '/'],
   ['About Us', '/about'],
   ['Courses', '/courses'],
-  ['Faculty', '/faculty'],
-  ['Results', '/results'],
   ['Testimonials', '/testimonials'],
   ['Contact', '/contact'],
 ];
@@ -25,7 +23,9 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => setOpen(false), [location.pathname]);
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
@@ -43,17 +43,31 @@ export default function Navbar() {
 
           <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary navigation">
             {links.map(([label, href]) => (
-              <NavLink key={href} to={href} end={href === '/'} className={({ isActive }) => `text-sm font-semibold transition hover:text-brand-700 ${isActive ? 'text-brand-700' : 'text-slate-600'}`}>
+              <NavLink
+                key={href}
+                to={href}
+                end={href === '/'}
+                className={({ isActive }) => `text-sm font-semibold transition hover:text-brand-700 ${isActive ? 'text-brand-700' : 'text-slate-600'}`}
+              >
                 {label}
               </NavLink>
             ))}
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link to="/contact" className="hidden rounded-xl bg-accent-500 px-4 py-2.5 text-sm font-bold text-brand-950 shadow-md shadow-accent-500/20 transition hover:-translate-y-0.5 hover:bg-accent-400 sm:inline-flex">
+            <Link
+              to="/contact"
+              className="hidden rounded-xl bg-accent-500 px-4 py-2.5 text-sm font-bold text-brand-950 shadow-md shadow-accent-500/20 transition hover:-translate-y-0.5 hover:bg-accent-400 sm:inline-flex"
+            >
               Book Free Demo Class
             </Link>
-            <button type="button" onClick={() => setOpen(true)} aria-label="Open menu" className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-white text-brand-950 lg:hidden">
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label="Open navigation menu"
+              aria-expanded={open}
+              className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-white text-brand-950 lg:hidden"
+            >
               <Menu size={22} />
             </button>
           </div>
@@ -63,21 +77,42 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <>
-            <motion.button initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(false)} aria-label="Close menu overlay" className="fixed inset-0 z-[60] bg-brand-950/35 backdrop-blur-sm" />
-            <motion.aside initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'spring', stiffness: 280, damping: 30 }} className="fixed right-0 top-0 z-[70] flex h-full w-[min(90vw,360px)] flex-col bg-paper p-6 shadow-2xl lg:hidden">
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setOpen(false)}
+              aria-label="Close menu overlay"
+              className="fixed inset-0 z-[60] bg-brand-950/35 backdrop-blur-sm"
+            />
+            <motion.aside
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', stiffness: 280, damping: 30 }}
+              className="fixed right-0 top-0 z-[70] flex h-full w-[min(90vw,360px)] flex-col bg-paper p-6 shadow-2xl lg:hidden"
+              aria-label="Mobile navigation"
+            >
               <div className="flex items-center justify-between">
                 <span className="font-display text-lg font-bold text-brand-950">Menu</span>
-                <button type="button" onClick={() => setOpen(false)} aria-label="Close menu" className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white">
+                <button type="button" onClick={() => setOpen(false)} aria-label="Close navigation menu" className="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white">
                   <X size={20} />
                 </button>
               </div>
-              <div className="mt-8 flex flex-col gap-2">
+
+              <nav className="mt-8 flex flex-col gap-2" aria-label="Mobile primary navigation">
                 {links.map(([label, href]) => (
-                  <NavLink key={href} to={href} end={href === '/'} className={({ isActive }) => `rounded-xl px-4 py-3.5 text-base font-semibold ${isActive ? 'bg-brand-100 text-brand-800' : 'text-slate-700'}`}>
+                  <NavLink
+                    key={href}
+                    to={href}
+                    end={href === '/'}
+                    className={({ isActive }) => `rounded-xl px-4 py-3.5 text-base font-semibold ${isActive ? 'bg-brand-100 text-brand-800' : 'text-slate-700'}`}
+                  >
                     {label}
                   </NavLink>
                 ))}
-              </div>
+              </nav>
+
               <div className="mt-auto">
                 <Link to="/contact" className="flex items-center justify-between rounded-2xl bg-accent-500 px-5 py-4 font-bold text-brand-950">
                   Book Free Demo Class <ArrowUpRight size={20} />
