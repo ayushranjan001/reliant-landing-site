@@ -24,7 +24,7 @@ export default function FindTutor() {
     const modeMatch = mode === 'Any' || tutor.mode?.includes(mode);
     const queryMatch = !query.trim() || [tutor.name, tutor.subject, tutor.teaches].join(' ').toLowerCase().includes(query.toLowerCase());
     return subjectMatch && modeMatch && queryMatch;
-  }), [subject, mode, query]);
+  }), [subject, mode, query, tutors]);
 
   return (
     <div className="bg-paper pt-28 sm:pt-32">
