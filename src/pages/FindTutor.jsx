@@ -1,17 +1,27 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight, CheckCircle2, MapPin, Search, ShieldCheck, SlidersHorizontal, Star, Video } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { tutors } from '../data/marketplace';
+import { tutors as fallbackTutors } from '../data/marketplace';
+import { getVerifiedTeachers } from '../lib/supabase';
 
 export default function FindTutor() {
   const [subject, setSubject] = useState('All');
   const [mode, setMode] = useState('Any');
   const [query, setQuery] = useState('');
+  const [tutors, setTutors] = useState(fallbackTutors);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getVerifiedTeachers()
+      .then((rows) => setTutors(rows.map((t) => ({ ...t, teaches: t.grades?.join(' • ') || 'Academic support', students: `${t.reviews || 0}+ reviews`, initials: t.initials, accent: t.accent || 'bg-brand-100 text-brand-700' }))))
+      .catch(() => setTutors(fallbackTutors))
+      .finally(() => setLoading(false));
+  }, []);
 
   const filtered = useMemo(() => tutors.filter((tutor) => {
     const subjectMatch = subject === 'All' || tutor.subject === subject;
-    const modeMatch = mode === 'Any' || tutor.mode.includes(mode);
+    const modeMatch = mode === 'Any' || tutor.mode?.includes(mode);
     const queryMatch = !query.trim() || [tutor.name, tutor.subject, tutor.teaches].join(' ').toLowerCase().includes(query.toLowerCase());
     return subjectMatch && modeMatch && queryMatch;
   }), [subject, mode, query]);
@@ -41,7 +51,7 @@ export default function FindTutor() {
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div><p className="text-sm font-bold uppercase tracking-[.18em] text-brand-700">Recommended teachers</p><h2 className="mt-2 font-display text-3xl font-bold text-brand-950 sm:text-4xl">{filtered.length} profiles match your filters</h2></div>
+          <div><p className="text-sm font-bold uppercase tracking-[.18em] text-brand-700">Recommended teachers</p><h2 className="mt-2 font-display text-3xl font-bold text-brand-950 sm:text-4xl">{loading ? 'Loading verified teachers…' : `${filtered.length} profiles match your filters`}</h2></div>
           <Link to="/contact" className="inline-flex items-center gap-2 font-bold text-brand-700">Need help choosing? Talk to us <ArrowRight size={17}/></Link>
         </div>
         <div className="mt-8 grid gap-5 md:grid-cols-2">
@@ -59,7 +69,7 @@ export default function FindTutor() {
                 <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Experience</p><p className="mt-1 font-bold text-brand-950">{tutor.experience}</p></div>
                 <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Rating</p><p className="mt-1 inline-flex items-center gap-1 font-bold text-brand-950"><Star size={14} className="fill-accent-500 text-accent-500"/>{tutor.rating}</p></div>
                 <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Students</p><p className="mt-1 font-bold text-brand-950">{tutor.students}</p></div>
-                <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Rate</p><p className="mt-1 font-bold text-brand-950">{tutor.rate}</p></div>
+                <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Rate</p><p className="mt-1 font-bold text-brand-950">{{tutor.rate}</p></div>
               </div>
               <div className="mt-6 flex items-center justify-between gap-3 border-t border-brand-100 pt-5">
                 <span className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500"><Video size={16}/> {tutor.mode}</span>
