@@ -20,3 +20,10 @@ export async function getVerifiedTeachers() {
 export async function getOpenStudentRequirements() {
   return request('student_requirements', '?select=*&status=eq.open&order=created_at.desc');
 }
+
+export async function getFilterCatalog(table) {
+  return request(table, '?select=*&order=name.asc');
+}
+export async function getDashboardMetrics() {
+  return request('demo_dashboard_metrics', '?select=*&order=metric_group.asc,sort_order.asc');
+}
