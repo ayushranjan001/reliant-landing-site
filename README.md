@@ -1,19 +1,24 @@
-# Reliant Landing Website
+# Reliant India Home Tuition
 
-A responsive landing website built to represent a business presence online.
+Modern React/Vite landing page for Reliant India's home tuition service.
 
-## Tech Stack
-- HTML
-- CSS
+## Stack
+- React 19
+- Vite
+- Material UI
+- Redux Toolkit
+- Redux Saga
 
-## Features
-- Clean and responsive layout
-- Multi-section landing page
-- Mobile-friendly design
+## Development
+```bash
+npm install
+npm run dev
+```
 
-## Live Demo
-https://<your-netlify-link>.netlify.app
+## Production
+```bash
+npm run build
+npm run preview
+```
 
-## Purpose
-This project demonstrates my frontend fundamentals, including layout design,
-responsiveness, and clean HTML/CSS structure.
+The enquiry form prepares a WhatsApp message using the business contact number already used by the previous site.
