@@ -80,14 +80,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-brand-950">
+      <section id="courses" className="bg-brand-950 scroll-mt-28">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-            <SectionHeading eyebrow="Courses preview" title="Study support that fits the next step." copy="From school fundamentals to focused exam preparation. Replace the placeholders with your final course catalogue." />
+            <SectionHeading dark eyebrow="Courses preview" title="Study support that fits the next step." copy="From school fundamentals to focused exam preparation. Replace the placeholders with your final course catalogue." />
             <Link to="/courses" className="inline-flex shrink-0 items-center gap-2 font-bold text-accent-400 hover:text-accent-300">View all courses <ArrowRight size={18} /></Link>
           </div>
           <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {courses.slice(0, 4).map((course, index) => <motion.div key={course.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * .06 }} whileHover={{ y: -5 }} className="rounded-3xl border border-white/10 bg-white/7 p-6 backdrop-blur"><div className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-accent-300">{course.category}</div><h3 className="mt-5 font-display text-xl font-bold text-white">{course.subject}</h3><p className="mt-2 text-sm leading-6 text-white/55">{course.tag}</p><div className="mt-6 flex items-end justify-between gap-3"><span className="text-sm text-white/55">{course.duration}</span><span className="font-bold text-accent-300">{course.fee}</span></div></motion.div>)}
+            {courses.slice(0, 4).map((course, index) => <motion.div key={course.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * .06 }} whileHover={{ y: -5 }} className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-xl shadow-black/10 backdrop-blur"><div className="inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-accent-300">{course.category}</div><h3 className="mt-5 font-display text-xl font-bold text-white">{course.subject}</h3><p className="mt-2 text-sm leading-6 text-white/70">{course.tag}</p><div className="mt-6 flex items-end justify-between gap-3"><span className="text-sm text-white/70">{course.duration}</span><span className="font-bold text-accent-300">{course.fee}</span></div></motion.div>)}
           </div>
         </div>
       </section>
