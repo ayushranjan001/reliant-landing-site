@@ -1,9 +1,19 @@
+import React from 'react';
 import { ArrowRight, BriefcaseBusiness, CheckCircle2, IndianRupee, ShieldCheck, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { studentRequests } from '../data/marketplace';
+import { studentRequests as fallbackRequests } from '../data/marketplace';
+import { getOpenStudentRequirements } from '../lib/supabase';
 
 export default function FindStudents() {
+  const [requests, setRequests] = React.useState(fallbackRequests);
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
+    getOpenStudentRequirements()
+      .then((rows) => setRequests(rows.map((r) => ({ ...r, title: `${r.class_level} ${r.subject}`, place: [r.location, r.mode].filter(Boolean).join(' • '), budget: r.budget, timing: r.schedule, posted: new Date(r.created_at).toLocaleDateString(), urgency: r.status === 'open' ? 'Open' : r.status }))))
+      .catch(() => setRequests(fallbackRequests))
+      .finally(() => setLoading(false));
+  }, []);
   return (
     <div className="bg-paper pt-28 sm:pt-32">
       <section className="bg-brand-950 text-white">
@@ -19,9 +29,9 @@ export default function FindStudents() {
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-start">
-          <div><p className="text-sm font-bold uppercase tracking-[.18em] text-brand-700">Fresh student demand</p><h2 className="mt-2 font-display text-3xl font-bold text-brand-950 sm:text-4xl">See real requirements before you connect.</h2><p className="mt-4 leading-7 text-slate-600">The marketplace should let educators filter by subject, grade, location, teaching mode, timing and budget — then unlock the opportunities they actually want.</p><div className="mt-7 grid gap-3"><div className="flex items-start gap-3 rounded-2xl bg-white p-4 border border-brand-100"><Users className="mt-0.5 text-brand-700"/><div><p className="font-bold text-brand-950">Qualified demand</p><p className="mt-1 text-sm text-slate-600">Profiles and requests can be verified before they enter the paid marketplace flow.</p></div></div><div className="flex items-start gap-3 rounded-2xl bg-white p-4 border border-brand-100"><IndianRupee className="mt-0.5 text-brand-700"/><div><p className="font-bold text-brand-950">Transparent opportunity</p><p className="mt-1 text-sm text-slate-600">Show the learner’s budget or fee expectation before the teacher commits time.</p></div></div></div></div>
+          <div><p className="text-sm font-bold uppercase tracking-[.18em] text-brand-700">Fresh student demand</p><h2 className="mt-2 font-display text-3xl font-bold text-brand-950 sm:text-4xl">{loading ? 'Loading student requirements…' : 'See real requirements before you connect.'}</h2><p className="mt-4 leading-7 text-slate-600">The marketplace should let educators filter by subject, grade, location, teaching mode, timing and budget — then unlock the opportunities they actually want.</p><div className="mt-7 grid gap-3"><div className="flex items-start gap-3 rounded-2xl bg-white p-4 border border-brand-100"><Users className="mt-0.5 text-brand-700"/><div><p className="font-bold text-brand-950">Qualified demand</p><p className="mt-1 text-sm text-slate-600">Profiles and requests can be verified before they enter the paid marketplace flow.</p></div></div><div className="flex items-start gap-3 rounded-2xl bg-white p-4 border border-brand-100"><IndianRupee className="mt-0.5 text-brand-700"/><div><p className="font-bold text-brand-950">Transparent opportunity</p><p className="mt-1 text-sm text-slate-600">Show the learner’s budget or fee expectation before the teacher commits time.</p></div></div></div></div>
           <div className="grid gap-4">
-            {studentRequests.map((request,index)=>(
+            {requests.map((request,index)=>(
               <motion.article key={request.id} initial={{opacity:0,y:18}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:index*.07}} className="rounded-3xl border border-brand-100 bg-white p-6 card-shadow">
                 <div className="flex flex-wrap items-start justify-between gap-3"><div><span className="inline-flex rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-800">{request.urgency}</span><h3 className="mt-3 font-display text-xl font-bold text-brand-950">{request.title}</h3><p className="mt-2 text-sm text-slate-500">{request.place}</p></div><p className="text-xs font-semibold text-slate-400">{request.posted}</p></div>
                 <div className="mt-5 grid gap-3 text-sm sm:grid-cols-2"><div className="rounded-xl bg-paper p-3"><span className="text-slate-400">Budget</span><p className="mt-1 font-bold text-brand-950">{request.budget}</p></div><div className="rounded-xl bg-paper p-3"><span className="text-slate-400">Preferred timing</span><p className="mt-1 font-bold text-brand-950">{request.timing}</p></div></div>
