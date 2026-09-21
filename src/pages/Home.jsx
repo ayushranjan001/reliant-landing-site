@@ -7,6 +7,7 @@ import StatCounter from '../components/StatCounter';
 import { courses } from '../data/courses';
 import { results } from '../data/results';
 import { testimonials } from '../data/testimonials';
+import heroImageUrl from '../../Media/tuitionservice.png';
 
 const features = [
   [Users, 'Small, focused learning', 'One student, one tutor, one plan — built around the learner rather than a generic timetable.'],
@@ -56,7 +57,7 @@ export default function Home() {
           <motion.div initial={{ opacity: 0, x: 25 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .7, delay: .12 }} className="relative mx-auto w-full max-w-xl">
             <div className="absolute -inset-4 rounded-[2rem] border border-brand-100 bg-brand-50/50" />
             <div className="relative overflow-hidden rounded-[2rem] border border-white bg-white p-2 shadow-2xl shadow-brand-950/10">
-              <img src="/Media/tuitionservice.png" alt="Tutor helping a student learn at home" fetchPriority="high" className="aspect-[4/4.2] w-full rounded-[1.6rem] object-cover" />
+              <img src={heroImageUrl} alt="Tutor helping a student learn at home" fetchPriority="high" className="aspect-[4/4.2] w-full rounded-[1.6rem] object-cover" />
             </div>
             <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 4.8, ease: 'easeInOut' }} className="absolute -bottom-7 left-4 hidden w-64 rounded-2xl border border-slate-100 bg-white p-4 card-shadow sm:block">
               <div className="flex items-center gap-3"><div className="grid h-11 w-11 place-items-center rounded-xl bg-brand-100 text-brand-700"><GraduationCap size={22} /></div><div><p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Learning plan</p><p className="font-display text-sm font-bold text-brand-950">Built for your child</p></div></div>

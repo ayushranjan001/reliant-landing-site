@@ -1,5 +1,6 @@
 import { ArrowUpRight, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import logoUrl from '../../Media/favi.png';
 
 const quickLinks = [
   ['Home', '/'],
@@ -17,7 +18,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <span className="grid h-11 w-11 place-items-center rounded-xl bg-white/10 p-2">
-              <img src="/Media/favi.png" alt="Reliant India logo" className="h-full w-full object-contain" />
+              <img src={logoUrl} alt="Reliant India logo" className="h-full w-full object-contain" />
             </span>
             <div>
               <p className="font-display font-bold">Reliant India</p>
