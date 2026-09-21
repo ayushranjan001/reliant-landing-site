@@ -8,6 +8,8 @@ const links = [
   ['Home', '/'],
   ['About Us', '/about'],
   ['Courses', '/courses'],
+  ['Find a Tutor', '/find-tutor'],
+  ['Teach with Us', '/find-students'],
   ['Testimonials', '/testimonials'],
   ['Contact', '/contact'],
 ];
@@ -64,7 +66,7 @@ export default function Navbar() {
               end
               className="hidden rounded-xl bg-accent-500 px-4 py-2.5 text-sm font-bold text-brand-950 shadow-md shadow-accent-500/20 transition hover:-translate-y-0.5 hover:bg-accent-400 sm:inline-flex"
             >
-              Book Free Demo Class
+              Get Started
             </NavLink>
 
             <button

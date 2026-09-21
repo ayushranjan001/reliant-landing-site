@@ -6,6 +6,8 @@ const quickLinks = [
   ['Home', '/'],
   ['About Us', '/about'],
   ['Courses', '/courses'],
+  ['Find a Tutor', '/find-tutor'],
+  ['Teach with Us', '/find-students'],
   ['Testimonials', '/testimonials'],
   ['Contact', '/contact'],
 ];
