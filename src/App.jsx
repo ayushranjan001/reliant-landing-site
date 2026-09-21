@@ -14,11 +14,6 @@ const WA_NUMBER = '917766911938';
 
 function Reveal({ children, delay = 0, sx }) {
   const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const node = document.querySelectorAll('.reveal-hook');
-    const target = Array.from(node).find((el) => el.dataset.revealId === String(Math.random()));
-    return () => target;
-  }, []);
   const ref = React.useRef(null);
   useEffect(() => {
     const el = ref.current;
