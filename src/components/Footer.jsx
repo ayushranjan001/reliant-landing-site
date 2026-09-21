@@ -9,6 +9,8 @@ const quickLinks = [
   ['Testimonials', '/testimonials'],
   ['Contact', '/contact'],
 ];
+const EMAIL = 'reliantindiagroup4u@gmail.com';
+const GMAIL_COMPOSE = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(EMAIL)}`;
 const courseLinks = ['Class 6–8', 'Class 9–10', 'Class 11–12', 'Competitive Exams'];
 
 export default function Footer() {
@@ -32,7 +34,7 @@ export default function Footer() {
             <a href="tel:+917766911938" aria-label="Call Reliant India" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-xs font-bold text-white/75 transition hover:bg-white/10 hover:text-white">
               <Phone size={15} /> Call
             </a>
-            <a href="mailto:reliantindiagroup4u@gmail.com" aria-label="Email Reliant India" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-xs font-bold text-white/75 transition hover:bg-white/10 hover:text-white">
+            <a href={GMAIL_COMPOSE} target="_blank" rel="noreferrer" aria-label="Email Reliant India" title="Open a new email to Reliant India" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-xs font-bold text-white/75 transition hover:bg-white/10 hover:text-white">
               <Mail size={15} /> Email
             </a>
             <a href="https://wa.me/917766911938" target="_blank" rel="noreferrer" aria-label="Chat with Reliant India on WhatsApp" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-xs font-bold text-white/75 transition hover:bg-white/10 hover:text-white">
@@ -74,7 +76,7 @@ export default function Footer() {
           </div>
           <div className="mt-5 grid gap-3 text-sm text-white/65">
             <a href="tel:+917766911938" className="flex items-center gap-3 hover:text-white"><Phone size={16} /> +91 77669 11938</a>
-            <a href="mailto:reliantindiagroup4u@gmail.com" className="flex items-center gap-3 break-all hover:text-white"><Mail size={16} /> reliantindiagroup4u@gmail.com</a>
+            <a href={GMAIL_COMPOSE} target="_blank" rel="noreferrer" title="Open a new email to Reliant India" className="flex items-center gap-3 break-all hover:text-white"><Mail size={16} /> {EMAIL}</a>
             <span className="flex items-start gap-3"><MapPin className="mt-0.5 shrink-0" size={16} /> Near IIT Bihta, Patna – 801103</span>
           </div>
         </div>
