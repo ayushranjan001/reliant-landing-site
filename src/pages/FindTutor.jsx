@@ -17,7 +17,7 @@ export default function FindTutor() {
   }), [subject, mode, query]);
 
   return (
-    <main className="bg-paper pt-28 sm:pt-32">
+    <div className="bg-paper pt-28 sm:pt-32">
       <section className="relative overflow-hidden bg-brand-950 text-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_15%,rgba(245,158,11,.18),transparent_30%),radial-gradient(circle_at_12%_90%,rgba(59,130,246,.18),transparent_28%)]" />
         <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
@@ -77,6 +77,6 @@ export default function FindTutor() {
       </section>
 
       <section className="bg-white"><div className="mx-auto grid max-w-7xl gap-5 px-4 py-14 sm:px-6 lg:grid-cols-3 lg:px-8"><div className="rounded-3xl border border-brand-100 p-6"><ShieldCheck className="text-brand-700"/><h3 className="mt-5 font-display font-bold text-brand-950">Verified profiles</h3><p className="mt-2 text-sm leading-6 text-slate-600">Verification badges, credentials and profile quality checks can make tutor selection more transparent.</p></div><div className="rounded-3xl border border-brand-100 p-6"><MapPin className="text-brand-700"/><h3 className="mt-5 font-display font-bold text-brand-950">Online or at home</h3><p className="mt-2 text-sm leading-6 text-slate-600">Match by teaching mode and location instead of forcing every student into the same format.</p></div><div className="rounded-3xl border border-brand-100 p-6"><CheckCircle2 className="text-brand-700"/><h3 className="mt-5 font-display font-bold text-brand-950">Pay inside the platform</h3><p className="mt-2 text-sm leading-6 text-slate-600">The booking path is designed to end in an on-site checkout rather than sending the learner to a separate enquiry flow.</p></div></div></section>
-    </main>
+    </div>
   );
 }
