@@ -69,7 +69,7 @@ export default function FindTutor() {
                 <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Experience</p><p className="mt-1 font-bold text-brand-950">{tutor.experience}</p></div>
                 <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Rating</p><p className="mt-1 inline-flex items-center gap-1 font-bold text-brand-950"><Star size={14} className="fill-accent-500 text-accent-500"/>{tutor.rating}</p></div>
                 <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Students</p><p className="mt-1 font-bold text-brand-950">{tutor.students}</p></div>
-                <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Rate</p><p className="mt-1 font-bold text-brand-950">{{tutor.rate}</p></div>
+                <div className="rounded-xl bg-paper p-3"><p className="text-xs font-semibold text-slate-400">Rate</p><p className="mt-1 font-bold text-brand-950">{tutor.rate}</p></div>
               </div>
               <div className="mt-6 flex items-center justify-between gap-3 border-t border-brand-100 pt-5">
                 <span className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500"><Video size={16}/> {tutor.mode}</span>
