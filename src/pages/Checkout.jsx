@@ -38,7 +38,7 @@ export default function Checkout() {
   };
 
   return (
-    <main className="bg-paper pt-28 sm:pt-32">
+    <div className="bg-paper pt-28 sm:pt-32">
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[.9fr_1.1fr] lg:px-8 lg:py-20">
         <div><p className="text-sm font-bold uppercase tracking-[.18em] text-brand-700">Secure checkout</p><h1 className="mt-3 font-display text-4xl font-bold tracking-[-.04em] text-brand-950 sm:text-5xl">Complete your Reliant booking.</h1><p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">The commercial experience ends here: choose the service, enter your details and pay from the platform instead of leaving for a manual enquiry.</p><div className="mt-8 grid gap-3 text-sm"><div className="flex items-center gap-3 rounded-2xl bg-white p-4 border border-brand-100"><LockKeyhole className="text-brand-700"/><span><strong className="text-brand-950">Secure checkout flow</strong><br/><span className="text-slate-500">Payment provider credentials are kept outside the browser.</span></span></div><div className="flex items-center gap-3 rounded-2xl bg-white p-4 border border-brand-100"><ShieldCheck className="text-emerald-600"/><span><strong className="text-brand-950">Transparent pricing</strong><br/><span className="text-slate-500">No hidden fields or offline payment instructions.</span></span></div></div></div>
         <form onSubmit={handlePay} className="rounded-[2rem] border border-brand-100 bg-white p-6 card-shadow sm:p-8">
@@ -51,6 +51,6 @@ export default function Checkout() {
           <Link to="/" className="mt-5 block text-center text-sm font-bold text-brand-700">Back to Reliant India</Link>
         </form>
       </section>
-    </main>
+    </div>
   );
 }
