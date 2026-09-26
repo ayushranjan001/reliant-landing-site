@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X, UserRound } from 'lucide-react';
 import logoUrl from '../../Media/favi.png';
 
 const links = [
@@ -62,7 +62,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-2">
             <NavLink
-              to="/contact"
+              to="/auth?mode=login"
               end
               className="hidden rounded-xl bg-accent-500 px-4 py-2.5 text-sm font-bold text-brand-950 shadow-md shadow-accent-500/20 transition hover:-translate-y-0.5 hover:bg-accent-400 sm:inline-flex"
             >
