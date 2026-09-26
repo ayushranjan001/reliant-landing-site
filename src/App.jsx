@@ -12,6 +12,7 @@ import FindTutor from './pages/FindTutor';
 import FindStudents from './pages/FindStudents';
 import Checkout from './pages/Checkout';
 import Dashboard from './pages/Dashboard';
+import Auth from './pages/Auth';
 
 const meta = {
   '/': ['Reliant India Home Tuition | Personalised Home Tutors', 'Personalised home tuition with flexible learning support, tutor matching and academic guidance from Reliant India.'],
@@ -50,6 +51,7 @@ export default function App() {
         <Route path="/find-students" element={<FindStudents />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/auth" element={<Auth />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </SiteLayout>
