@@ -79,8 +79,8 @@ export default function Auth() {
             </div>
 
             <div className="mb-6 grid grid-cols-2 rounded-xl bg-paper p-1">
-              <button type="button" onClick={() => { setMode('login'); setError(''); setMessage(''); }} className={\`rounded-lg px-3 py-2.5 text-sm font-bold \${mode === 'login' ? 'bg-white text-brand-950 shadow-sm' : 'text-slate-500'}\`}>Log in</button>
-              <button type="button" onClick={() => { setMode('signup'); setError(''); setMessage(''); }} className={\`rounded-lg px-3 py-2.5 text-sm font-bold \${mode === 'signup' ? 'bg-white text-brand-950 shadow-sm' : 'text-slate-500'}\`}>Sign up</button>
+              <button type="button" onClick={() => { setMode('login'); setError(''); setMessage(''); }} className={`rounded-lg px-3 py-2.5 text-sm font-bold ${mode === 'login' ? 'bg-white text-brand-950 shadow-sm' : 'text-slate-500'}`}>Log in</button>
+              <button type="button" onClick={() => { setMode('signup'); setError(''); setMessage(''); }} className={`rounded-lg px-3 py-2.5 text-sm font-bold ${mode === 'signup' ? 'bg-white text-brand-950 shadow-sm' : 'text-slate-500'}`}>Sign up</button>
             </div>
 
             {mode === 'signup' && (
@@ -88,7 +88,7 @@ export default function Auth() {
                 <p className="mb-2 text-sm font-bold text-brand-950">I am joining as</p>
                 <div className="grid gap-2">
                   {roles.map(({ id, label, icon: Icon, description }) => (
-                    <button type="button" key={id} onClick={() => setRole(id)} className={\`flex items-center gap-3 rounded-2xl border p-3 text-left transition \${role === id ? 'border-brand-700 bg-brand-50 ring-2 ring-brand-100' : 'border-brand-100 hover:border-brand-300'}\`}>
+                    <button type="button" key={id} onClick={() => setRole(id)} className={`flex items-center gap-3 rounded-2xl border p-3 text-left transition ${role === id ? 'border-brand-700 bg-brand-50 ring-2 ring-brand-100' : 'border-brand-100 hover:border-brand-300'}`}>
                       <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-brand-700 shadow-sm"><Icon size={18} /></span>
                       <span><span className="block text-sm font-bold text-brand-950">{label}</span><span className="block text-xs text-slate-500">{description}</span></span>
                     </button>
