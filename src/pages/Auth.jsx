@@ -28,7 +28,7 @@ export default function Auth() {
 
     try {
       if (mode === 'signup') {
-        const data = await signUp(form);
+        const data = await signUp({ ...form, role });
         if (data.session) {
           navigate(role === 'teacher' ? '/find-students' : '/dashboard');
         } else {
