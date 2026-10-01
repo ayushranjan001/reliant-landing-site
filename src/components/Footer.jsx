@@ -79,7 +79,7 @@ export default function Footer() {
           <div className="mt-5 grid gap-3 text-sm text-white/65">
             <a href="tel:+917766911938" className="flex items-center gap-3 hover:text-white"><Phone size={16} /> +91 77669 11938</a>
             <a href={GMAIL_COMPOSE} target="_blank" rel="noreferrer" title="Open a new email to Reliant India" className="flex items-center gap-3 break-all hover:text-white"><Mail size={16} /> {EMAIL}</a>
-            <span className="flex items-start gap-3"><MapPin className="mt-0.5 shrink-0" size={16} /> Near IIT Bihta, Patna – 801103</span>
+            <span className="flex items-start gap-3"><MapPin className="mt-0.5 shrink-0" size={16} /> S K Nagar, Income Tax Chauraha, Patna – 800001</span>
           </div>
         </div>
       </div>
