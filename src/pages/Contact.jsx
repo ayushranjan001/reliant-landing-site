@@ -44,7 +44,7 @@ export default function Contact() {
             {submitted && <p role="status" className="mt-4 rounded-xl bg-brand-100 px-4 py-3 text-sm font-semibold text-brand-800">Your enquiry is prepared. Complete the WhatsApp message to contact Reliant India.</p>}
           </form>
 
-          <div className="overflow-hidden rounded-[2rem] border border-brand-100 bg-white"><iframe title="Reliant India location map" loading="lazy" className="h-80 w-full border-0" src="https://www.google.com/maps?q=Near%20IIT%20Bihta%2C%20Patna%20801103&output=embed" /></div>
+          <div className="overflow-hidden rounded-[2rem] border border-brand-100 bg-white"><iframe title="Reliant India location map" loading="lazy" className="h-80 w-full border-0" src="https://www.google.com/maps?q=S%20K%20Nagar%2C%20Income%20Tax%20Chauraha%2C%20Patna%20800001&output=embed" /></div>
         </div>
       </div></section>
     </>
